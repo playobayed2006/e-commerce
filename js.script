@@ -1,0 +1,163 @@
+// Category block horizontal scroll (carousel-like)
+const catBlock = document.querySelector('.gi-category-block');
+let catStartX = null;
+let catScrollLeft = null;
+let catDragging = false;
+
+if (catBlock) {
+    catBlock.addEventListener('mousedown', (e) => {
+        catDragging = true;
+        catStartX = e.pageX - catBlock.offsetLeft;
+        catScrollLeft = catBlock.scrollLeft;
+        catBlock.style.cursor = 'grabbing';
+    });
+    catBlock.addEventListener('mouseleave', () => {
+        catDragging = false;
+        catBlock.style.cursor = '';
+    });
+    catBlock.addEventListener('mouseup', () => {
+        catDragging = false;
+        catBlock.style.cursor = '';
+    });
+    catBlock.addEventListener('mousemove', (e) => {
+        if (!catDragging) return;
+        e.preventDefault();
+        const x = e.pageX - catBlock.offsetLeft;
+        const walk = (x - catStartX) * 1.5;
+        catBlock.scrollLeft = catScrollLeft - walk;
+    });
+
+    // Touch support
+    catBlock.addEventListener('touchstart', (e) => {
+        catDragging = true;
+        catStartX = e.touches[0].pageX - catBlock.offsetLeft;
+        catScrollLeft = catBlock.scrollLeft;
+    });
+    catBlock.addEventListener('touchend', () => {
+        catDragging = false;
+    });
+    catBlock.addEventListener('touchmove', (e) => {
+        if (!catDragging) return;
+        const x = e.touches[0].pageX - catBlock.offsetLeft;
+        const walk = (x - catStartX) * 1.5;
+        catBlock.scrollLeft = catScrollLeft - walk;
+    });
+}
+// Hero slider functionality with fade and background animation
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.dot');
+const heroSection = document.querySelector('.hero-section');
+let current = 0;
+let timer;
+
+// Backgrounds for each slide
+const backgrounds = [
+    'linear-gradient(90deg, #f3f5f7 0%, #e0f7fa 100%)',
+    'linear-gradient(90deg, #f3f5f7 0%, #ffe0e0 100%)',
+    'linear-gradient(90deg, #f3f5f7 0%, #fffde7 100%)'
+];
+
+function showSlide(idx) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'fade-in');
+        if (i === idx) {
+            slide.classList.add('active', 'fade-in');
+        }
+    });
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === idx);
+    });
+    heroSection.style.background = backgrounds[idx];
+    current = idx;
+}
+
+function nextSlide() {
+    let next = (current + 1) % slides.length;
+    showSlide(next);
+}
+
+function startSlider() {
+    timer = setInterval(nextSlide, 4000);
+}
+
+function stopSlider() {
+    clearInterval(timer);
+}
+
+dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+        stopSlider();
+        showSlide(i);
+        startSlider();
+    });
+});
+
+showSlide(0);
+startSlider();
+
+// Mouse drag/swipe and touch support
+let startX = null;
+let isDragging = false;
+const slider = document.querySelector('.hero-slider');
+
+slider.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    slider.style.userSelect = 'none';
+});
+slider.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    let diff = e.clientX - startX;
+    if (Math.abs(diff) > 60) {
+        if (diff < 0) {
+            stopSlider();
+            nextSlide();
+            startSlider();
+        } else {
+            stopSlider();
+            let prev = (current - 1 + slides.length) % slides.length;
+            showSlide(prev);
+            startSlider();
+        }
+        isDragging = false;
+        startX = null;
+    }
+});
+slider.addEventListener('mouseup', () => {
+    isDragging = false;
+    startX = null;
+    slider.style.userSelect = '';
+});
+slider.addEventListener('mouseleave', () => {
+    isDragging = false;
+    startX = null;
+    slider.style.userSelect = '';
+});
+
+// Touch support for mobile
+slider.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+});
+slider.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    let diff = e.touches[0].clientX - startX;
+    if (Math.abs(diff) > 60) {
+        if (diff < 0) {
+            stopSlider();
+            nextSlide();
+            startSlider();
+        } else {
+            stopSlider();
+            let prev = (current - 1 + slides.length) % slides.length;
+            showSlide(prev);
+            startSlider();
+        }
+        isDragging = false;
+        startX = null;
+    }
+});
+slider.addEventListener('touchend', () => {
+    isDragging = false;
+    startX = null;
+});
