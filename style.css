@@ -423,6 +423,308 @@ nav {
 }
 
 
+
+/* day of the deal section  */
+
+.day-of-the-deal-section {
+    padding: 40px;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+}
+
+.deal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.deal-header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.deal-header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #000000;
+}
+
+.deal-timer {
+    display: flex;
+    background: #dfdfdf;
+    border-radius: 6px;
+    padding: 14px 12px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 800;
+    display: flex;
+    gap: 10px;
+}
+
+.deal-days b {
+    font-size: 14px;
+    color: #222;
+}
+
+.deal-countdown {
+    font-weight: 800;
+    color: #0f0f0f;
+}
+
+.deal-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.deal-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.deal-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+}
+
+.deal-img {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.deal-img img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.deal-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.deal-badge.sale {
+    background: #ff6b6b;
+}
+
+.deal-badge.new {
+    background: #2ecc71;
+}
+
+.deal-info {
+    padding: 15px;
+}
+
+.deal-category {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.deal-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.deal-title a {
+    text-decoration: none;
+    color: inherit;
+
+
+    &:hover {
+        color: #5cb98b;
+    }
+}
+
+.deal-rating {
+    font-size: 14px;
+    color: #f39c12;
+    margin-bottom: 8px;
+}
+
+.deal-price {
+    font-size: 15px;
+}
+
+.deal-price .deal-new {
+    font-weight: 600;
+    color: #222;
+    margin-right: 6px;
+}
+
+.deal-price .deal-old {
+    text-decoration: line-through;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.deal-extra {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #666;
+}
+
+
+/* offer sections starts */
+.offer-banner-section {
+    margin: 40px;
+}
+
+.gi-animated-banner {
+    background: url("https://images.unsplash.com/photo-1651671132999-6480e8861ba2?q=80&w=1632") no-repeat left center / cover; 
+    /* replace with your real background image */
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 380px;
+    padding: 40px;
+    position: relative;
+}
+
+.gi-banner-detail {
+    max-width: 50%;
+    text-align: right;
+    margin-right: 64px;
+}
+
+.gi-banner-info h2 {
+    font-size: 62px;
+    font-weight: 700;
+    color: #474747;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.gi-banner-info h3 {
+    font-size: 38px;
+    font-weight: 600;
+    color: #119247;
+    margin-bottom: 20px;
+}
+
+.gi-banner-info h3 span {
+    color: #555;
+    margin-left: 5px;
+}
+
+.gi-btn-1 {
+    display: inline-block;
+    background: #119247;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.gi-btn-1:hover {
+    background: #27ae60;
+}
+
+
+
+
+/* new arrivals section styles */
+.new-arrivals-section {
+    padding: 40px;
+    color: #333;
+}
+
+.new-arrival-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 40px;
+ 
+}
+
+.new-arrival-tabs button{
+    border: none;
+    padding: 10px 10px;
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: transparent;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+        color: #119247;
+    }
+}
+
+.new-arrival-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 40px;
+}
+
+.new-arrival-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s ease;
+    width:100%;
+    height: 100%;
+   
+    &:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        transform: translateY(-4px);
+    }
+}
+
+
+.new-arrival-img {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.new-arrival-info {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 4px;
+}
+
+.new-arrival-info i {
+    color: #f39c12;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Responsive Styles */
 @media (max-width: 1200px) {
     .gi-category-block {

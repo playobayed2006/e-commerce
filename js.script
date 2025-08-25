@@ -52,6 +52,10 @@ dots.forEach((dot, i) => {
 showSlide(0);
 startSlider();
 
+
+
+
+
 // Mouse drag/swipe and touch support
 let startX = null;
 let isDragging = false;
@@ -136,3 +140,35 @@ slider.addEventListener('touchend', () => {
     isDragging = false;
     startX = null;
 });
+
+
+
+
+// Dynamic countdown for Day Of The Deal
+(function() {
+    // Set the deal end date (8 days from now)
+    const dealEnd = new Date();
+    dealEnd.setDate(dealEnd.getDate() + 8);
+    dealEnd.setHours(18, 51, 0, 0); // Set to 18:51:00 for demo
+
+    function pad(n) { return n < 10 ? '0' + n : n; }
+
+    function updateCountdown() {
+        const now = new Date();
+        let diff = dealEnd - now;
+        if (diff < 0) diff = 0;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+        // Update DOM
+        const daysEl = document.querySelector('.deal-days b');
+        const timerEl = document.querySelector('.deal-countdown');
+        if (daysEl && timerEl) {
+            daysEl.textContent = days;
+            timerEl.textContent = pad(hours) + ' : ' + pad(mins) + ' : ' + pad(secs);
+        }
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+})();
