@@ -172,3 +172,17 @@ slider.addEventListener('touchend', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 })();
+
+
+//trending section start
+document.querySelectorAll(".tab-menu li").forEach(tab => {
+  tab.addEventListener("click", function () {
+    // remove active from all
+    document.querySelectorAll(".tab-menu li").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+    // add active to clicked
+    this.classList.add("active");
+    document.getElementById(this.dataset.tab).classList.add("active");
+  });
+});
