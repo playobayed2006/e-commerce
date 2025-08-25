@@ -1,49 +1,6 @@
-// Category block horizontal scroll (carousel-like)
-const catBlock = document.querySelector('.gi-category-block');
-let catStartX = null;
-let catScrollLeft = null;
-let catDragging = false;
 
-if (catBlock) {
-    catBlock.addEventListener('mousedown', (e) => {
-        catDragging = true;
-        catStartX = e.pageX - catBlock.offsetLeft;
-        catScrollLeft = catBlock.scrollLeft;
-        catBlock.style.cursor = 'grabbing';
-    });
-    catBlock.addEventListener('mouseleave', () => {
-        catDragging = false;
-        catBlock.style.cursor = '';
-    });
-    catBlock.addEventListener('mouseup', () => {
-        catDragging = false;
-        catBlock.style.cursor = '';
-    });
-    catBlock.addEventListener('mousemove', (e) => {
-        if (!catDragging) return;
-        e.preventDefault();
-        const x = e.pageX - catBlock.offsetLeft;
-        const walk = (x - catStartX) * 1.5;
-        catBlock.scrollLeft = catScrollLeft - walk;
-    });
-
-    // Touch support
-    catBlock.addEventListener('touchstart', (e) => {
-        catDragging = true;
-        catStartX = e.touches[0].pageX - catBlock.offsetLeft;
-        catScrollLeft = catBlock.scrollLeft;
-    });
-    catBlock.addEventListener('touchend', () => {
-        catDragging = false;
-    });
-    catBlock.addEventListener('touchmove', (e) => {
-        if (!catDragging) return;
-        const x = e.touches[0].pageX - catBlock.offsetLeft;
-        const walk = (x - catStartX) * 1.5;
-        catBlock.scrollLeft = catScrollLeft - walk;
-    });
-}
 // Hero slider functionality with fade and background animation
+
 const slides = document.querySelectorAll('.hero-slide');
 const dots = document.querySelectorAll('.dot');
 const heroSection = document.querySelector('.hero-section');
@@ -122,6 +79,15 @@ slider.addEventListener('mousemove', (e) => {
         isDragging = false;
         startX = null;
     }
+        // Loop left/right for category block
+        const cardWidth = catBlock.firstElementChild.offsetWidth + 32;
+        if (catBlock.scrollLeft <= 0) {
+            catBlock.appendChild(catBlock.firstElementChild);
+            catBlock.scrollLeft += cardWidth;
+        } else if (catBlock.scrollLeft + catBlock.offsetWidth >= catBlock.scrollWidth) {
+            catBlock.insertBefore(catBlock.lastElementChild, catBlock.firstElementChild);
+            catBlock.scrollLeft -= cardWidth;
+        }
 });
 slider.addEventListener('mouseup', () => {
     isDragging = false;
@@ -156,6 +122,15 @@ slider.addEventListener('touchmove', (e) => {
         isDragging = false;
         startX = null;
     }
+        // Loop left/right for category block
+        const cardWidth = catBlock.firstElementChild.offsetWidth + 32;
+        if (catBlock.scrollLeft <= 0) {
+            catBlock.appendChild(catBlock.firstElementChild);
+            catBlock.scrollLeft += cardWidth;
+        } else if (catBlock.scrollLeft + catBlock.offsetWidth >= catBlock.scrollWidth) {
+            catBlock.insertBefore(catBlock.lastElementChild, catBlock.firstElementChild);
+            catBlock.scrollLeft -= cardWidth;
+        }
 });
 slider.addEventListener('touchend', () => {
     isDragging = false;
